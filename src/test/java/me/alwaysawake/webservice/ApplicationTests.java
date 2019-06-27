@@ -1,4 +1,4 @@
-package me.alwaysawake.springbootwebservice;
+package me.alwaysawake.webservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
