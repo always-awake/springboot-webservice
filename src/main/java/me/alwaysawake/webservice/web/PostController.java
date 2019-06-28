@@ -17,7 +17,7 @@ public class PostController {
     @PostMapping("/posts")
     public ResponseEntity<Void> savePosts(@RequestBody PostsSaveRequestDto dto) {
         postservice.save(dto);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
@@ -35,9 +35,8 @@ public class PostController {
 
     //수정
     @PutMapping("/posts/{post-id}")
-    public ResponseEntity<Void> putPosts(@RequestBody PostsSaveRequestDto dto, @PathVariable(value = "post-id") Long postId) {
-        postservice.put(dto, postId);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<PostsPutResponseDto> putPosts(@RequestBody PostsPutRequestDto dto, @PathVariable(value = "post-id") Long postId) {
+        return ResponseEntity.status(HttpStatus.OK).body(postservice.put(dto, postId));
     }
 
     //삭제

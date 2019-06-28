@@ -11,5 +11,5 @@ public interface PostService {
 
     List<PostsGetDetailResponseDto> getList();
 
-    PostsPutResponseDto put(PostsSaveRequestDto postsSaveRequestDto, Long postId);
+    PostsPutResponseDto put(PostsPutRequestDto postsSaveRequestDto, Long postId);
 }

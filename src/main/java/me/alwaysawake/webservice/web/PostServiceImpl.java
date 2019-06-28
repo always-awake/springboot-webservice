@@ -39,7 +39,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostsGetDetailResponseDto> getList() {
         List<PostsGetDetailResponseDto> postsGetDetailResponseDtos = new ArrayList<>();
-        List<Posts> posts =  postsRepository.findAll();
+        List<Posts> posts = postsRepository.findAll();
         for (Posts post : posts) {
             postsGetDetailResponseDtos.add(
                     new PostsGetDetailResponseDto(
@@ -57,8 +57,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostsPutResponseDto put(Long postId) {
+    public PostsPutResponseDto put(PostsPutRequestDto postsPutRequestDto, Long postId) {
         Posts posts = postsRepository.findById(postId).orElseThrow(NullPointerException::new);
-        return null;
+        posts.putTitle(postsPutRequestDto.getTitle());
+        posts.putContent(postsPutRequestDto.getContent());
+        postsRepository.save(posts);
+        return new PostsPutResponseDto(
+                posts.getId(),
+                posts.getTitle(),
+                posts.getContent(),
+                posts.getAuthor()
+        );
     }
 }
